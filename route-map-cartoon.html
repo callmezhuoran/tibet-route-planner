@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="川藏 G317、G318 与川西环线卫星地形交互地图">
+  <title>川藏路线地图</title>
+  <script type="module" src="/src/map-app.js"></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">2026 · 四人包车草案</p>
+        <h1>川藏路线地图</h1>
+      </div>
+      <p class="trip-window">9月25日 成都出发<br>10月6日 拉萨离开</p>
+    </header>
+
+    <nav class="page-tabs" role="tablist" aria-label="攻略视图">
+      <button class="page-tab is-active" id="tab-map" type="button" role="tab" aria-selected="true" aria-controls="map-panel" data-page-tab="map">地图总览</button>
+      <button class="page-tab" id="tab-routes" type="button" role="tab" aria-selected="false" aria-controls="routes-panel" data-page-tab="routes">路线用时</button>
+      <button class="page-tab" id="tab-itinerary" type="button" role="tab" aria-selected="false" aria-controls="itinerary-panel" data-page-tab="itinerary">完整路线</button>
+    </nav>
+
+    <section class="page-panel" id="map-panel" role="tabpanel" aria-labelledby="tab-map" data-page-panel="map">
+      <nav class="map-toolbar" aria-label="地图控制">
+      <div class="route-tabs" role="group" aria-label="路线选择">
+        <button class="route-tab is-active" type="button" data-route-mode="all" aria-pressed="true">全部</button>
+        <button class="route-tab" type="button" data-route-mode="g318" aria-pressed="false">
+          <span class="route-swatch swatch-318" aria-hidden="true"></span>G318 南线
+        </button>
+        <button class="route-tab" type="button" data-route-mode="g317" aria-pressed="false">
+          <span class="route-swatch swatch-317" aria-hidden="true"></span>G317 北线
+        </button>
+        <button class="route-tab" type="button" data-route-mode="grand-loop" aria-pressed="false">川藏大环线</button>
+        <button class="route-tab" type="button" data-route-mode="west-loop" aria-pressed="false">川西小环线</button>
+      </div>
+
+      <div class="view-actions" role="group" aria-label="视图控制">
+        <button class="icon-button is-active" id="toggle-spots" type="button" aria-label="显示或隐藏景点" aria-pressed="true" data-tooltip="景点">
+          <i data-lucide="map-pin" aria-hidden="true"></i>
+        </button>
+        <button class="icon-button" id="focus-west" type="button" aria-label="聚焦川藏区域" data-tooltip="川藏聚焦">
+          <i data-lucide="focus" aria-hidden="true"></i>
+        </button>
+        <button class="icon-button" id="reset-view" type="button" aria-label="恢复全国视图" data-tooltip="全国视图">
+          <i data-lucide="maximize-2" aria-hidden="true"></i>
+        </button>
+      </div>
+      </nav>
+
+      <section class="map-stage spot-labels-collapsed" aria-label="中国地图上的川藏路线">
+        <div id="terrain-map" role="region" aria-label="卫星地形底图上的 G317、G318、川藏环线、云南支线、拉萨湖泊支线与精选景点"></div>
+        <div class="map-tooltip" id="map-tooltip" role="tooltip" hidden></div>
+        <div class="scale-note" aria-hidden="true">路线为旅行规划示意，不作导航</div>
+      </section>
+
+      <section class="selection-strip" id="selection-strip" aria-live="polite">
+        <span class="selection-mark mark-all" aria-hidden="true"></span>
+        <div>
+          <p class="selection-kicker" id="selection-kicker">路线总览</p>
+          <p class="selection-title" id="selection-title">G317 看藏地人文，G318 看峡谷、冰川、森林，并在拉萨收尾</p>
+        </div>
+        <p class="selection-meta" id="selection-meta">成都 · 拉萨 · 18 个精选景点组（含 3 个远线扩展）</p>
+      </section>
+
+      <section class="spot-catalog" aria-labelledby="spot-catalog-title">
+        <header class="catalog-header">
+          <div>
+            <p class="catalog-kicker">按地点与路线聚合</p>
+            <h2 id="spot-catalog-title">景点总表</h2>
+          </div>
+          <p>点击任一景点查看照片，并在地图上定位。</p>
+        </header>
+        <ol class="spot-list" id="spot-list"></ol>
+      </section>
+    </section>
+
+    <section class="page-panel route-planner" id="routes-panel" role="tabpanel" aria-labelledby="tab-routes" data-page-panel="routes" hidden>
+      <header class="route-planner-header">
+        <div>
+          <p class="catalog-kicker">2 条进藏主线 · 3 条景点支线</p>
+          <h2>线路与用时</h2>
+        </div>
+        <p>按四人包车、保留拍照时间、少长距离徒步估算。</p>
+      </header>
+      <div class="route-plan-summary" aria-label="本次行程建议">
+        <strong>12 天建议组合</strong>
+        <span>选择 1 条进藏主线，再从纳木错、羊卓雍措中安排 1 条拉萨支线。</span>
+      </div>
+      <div class="route-plan-list" id="route-plan-list"></div>
+      <p class="route-plan-footnote">川西小环线继续保留在地图中作为成都起止备选；单独游玩建议 5–6 天，不计入本次五条主线与支线。</p>
+    </section>
+
+    <section class="page-panel complete-route" id="itinerary-panel" role="tabpanel" aria-labelledby="tab-itinerary" data-page-panel="itinerary" hidden>
+      <header class="complete-route-header">
+        <div>
+          <p class="catalog-kicker">只规划行车关系 · 暂不拆分日期</p>
+          <h2>成都至拉萨完整路线</h2>
+        </div>
+        <button class="complete-route-map" id="complete-route-map" type="button">
+          <i data-lucide="map-pin" aria-hidden="true"></i>
+          <span>地图查看</span>
+        </button>
+      </header>
+
+      <div class="complete-route-summary">
+        <strong>主干逻辑</strong>
+        <span>成都沿 G318 到理塘，中途按需选择香格里拉线和南极洛线，再经德钦、盐井到芒康接回 G318，最终抵达拉萨。</span>
+      </div>
+
+      <ol class="route-flow" aria-label="成都至拉萨行车路线">
+        <li class="route-flow-stage is-main">
+          <span class="route-flow-index">01</span>
+          <div class="route-flow-copy">
+            <p class="route-flow-kind">G318 主干 · 成都至理塘</p>
+            <h3>成都 → 康定 → 新都桥 → 雅江 → 理塘</h3>
+            <p>先沿川藏南线进入高原，理塘是继续走 G318 或转入南部支线的分岔点。</p>
+          </div>
+        </li>
+
+        <li class="route-flow-stage is-option">
+          <span class="route-flow-index">可选 A</span>
+          <div class="route-flow-copy">
+            <p class="route-flow-kind">中途可选 · 香格里拉线</p>
+            <h3>理塘 → 稻城 → 亚丁 → 乡城 → 云南香格里拉</h3>
+            <p>选择后会离开 G318；若不去南极洛，可从香格里拉直接转 G214，经德钦、盐井前往芒康。</p>
+          </div>
+          <span class="route-flow-status">可独立选择</span>
+        </li>
+
+        <li class="route-flow-stage is-option is-demanding">
+          <span class="route-flow-index">可选 B</span>
+          <div class="route-flow-copy">
+            <p class="route-flow-kind">中途可选 · 南极洛线</p>
+            <h3>香格里拉 → 维西 → 巴迪乡 → 南极洛</h3>
+            <p>通常建立在香格里拉线之上；完整游览可能至少需要 2 天，核心景观还涉及高海拔长距离徒步。此处只保留行车关系，暂不排具体日期。</p>
+          </div>
+          <span class="route-flow-status">至少预留 2 天</span>
+        </li>
+
+        <li class="route-flow-stage is-connector">
+          <span class="route-flow-index">02</span>
+          <div class="route-flow-copy">
+            <p class="route-flow-kind">滇藏回接线 · 返回 G318</p>
+            <h3>维西 / 香格里拉 → 德钦 → 盐井 → 芒康</h3>
+            <p>不去南极洛时从香格里拉进入 G214；去南极洛后返回维西方向，经 S237 北上德钦，再沿 G214 在芒康接回 G318。</p>
+          </div>
+        </li>
+
+        <li class="route-flow-stage is-main">
+          <span class="route-flow-index">03</span>
+          <div class="route-flow-copy">
+            <p class="route-flow-kind">G318 主干 · 芒康至拉萨</p>
+            <h3>芒康 → 左贡 → 八宿 → 然乌 → 波密 → 鲁朗 → 林芝 → 拉萨</h3>
+            <p>重新回到川藏南线，继续经过藏东峡谷、冰川和林芝河谷抵达拉萨。</p>
+          </div>
+        </li>
+
+        <li class="route-flow-stage is-option">
+          <span class="route-flow-index">抵达后</span>
+          <div class="route-flow-copy">
+            <p class="route-flow-kind">拉萨周边可选支线</p>
+            <h3>纳木错线 / 羊卓雍措线</h3>
+            <p>两条都以拉萨为起终点，等主线日期确定后再决定是否二选一或全部保留。</p>
+          </div>
+          <span class="route-flow-status">后续决定</span>
+        </li>
+      </ol>
+
+      <footer class="complete-route-notes">
+        <strong>当前只确认路线结构</strong>
+        <p>下一步再根据包车司机反馈、道路状况和南极洛实际接驳方式，把这些路段拆成住宿点与日期。</p>
+      </footer>
+    </section>
+  </main>
+
+  <dialog class="spot-dialog" id="spot-dialog" aria-labelledby="spot-dialog-title">
+    <button class="dialog-close" id="spot-dialog-close" type="button" aria-label="关闭景点照片" data-tooltip="关闭">
+      <i data-lucide="x" aria-hidden="true"></i>
+    </button>
+    <div class="dialog-media">
+      <img id="spot-dialog-image" src="" alt="">
+    </div>
+    <div class="dialog-content">
+      <p class="dialog-kicker" id="spot-dialog-kicker"></p>
+      <h2 id="spot-dialog-title"></h2>
+      <p class="dialog-location" id="spot-dialog-location"></p>
+      <p class="dialog-note" id="spot-dialog-note"></p>
+      <dl class="dialog-facts">
+        <div>
+          <dt>路线关系</dt>
+          <dd id="spot-dialog-route"></dd>
+        </div>
+        <div>
+          <dt>体力提示</dt>
+          <dd id="spot-dialog-effort"></dd>
+        </div>
+      </dl>
+    </div>
+  </dialog>
+</body>
+</html>
