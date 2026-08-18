@@ -11,7 +11,7 @@
   <main class="app-shell">
     <header class="app-header">
       <div>
-        <p class="eyebrow">2026 · 四人包车草案</p>
+        <p class="eyebrow">2026 · 四人出行草案</p>
         <h1>川藏路线地图</h1>
       </div>
       <p class="trip-window">9月25日 成都出发<br>10月6日 拉萨离开</p>
@@ -21,6 +21,7 @@
       <button class="page-tab is-active" id="tab-map" type="button" role="tab" aria-selected="true" aria-controls="map-panel" data-page-tab="map">地图总览</button>
       <button class="page-tab" id="tab-routes" type="button" role="tab" aria-selected="false" aria-controls="routes-panel" data-page-tab="routes">路线用时</button>
       <button class="page-tab" id="tab-itinerary" type="button" role="tab" aria-selected="false" aria-controls="itinerary-panel" data-page-tab="itinerary">完整路线</button>
+      <button class="page-tab" id="tab-transport" type="button" role="tab" aria-selected="false" aria-controls="transport-panel" data-page-tab="transport">用车决策</button>
     </nav>
 
     <section class="page-panel" id="map-panel" role="tabpanel" aria-labelledby="tab-map" data-page-panel="map">
@@ -182,6 +183,266 @@
       <footer class="complete-route-notes">
         <strong>当前只确认路线结构</strong>
         <p>下一步再根据包车司机反馈、道路状况和南极洛实际接驳方式，把这些路段拆成住宿点与日期。</p>
+      </footer>
+    </section>
+
+    <section class="page-panel transport-planner" id="transport-panel" role="tabpanel" aria-labelledby="tab-transport" data-page-panel="transport" hidden>
+      <header class="transport-header">
+        <div>
+          <p class="catalog-kicker">4 人 · 2 名可轮换驾驶员</p>
+          <h2>用车方案与路段难度</h2>
+        </div>
+        <p>报价记录于 2026-08-19；路况只用于选方案，出发前仍需逐日核验。</p>
+      </header>
+
+      <div class="transport-verdict">
+        <span class="verdict-label">当前判断</span>
+        <strong>主线自驾可行，先把 1–1.2 万的计价口径问完整</strong>
+        <p>两名司机能明显缓解长途疲劳，G318 主线也以铺装路为主。若该价格已经包含租金、基础保险、异地还车，且油费和增补保险后仍明显低于包车，自驾性价比最高；格聂南线与南极洛仍建议换当地接驳或熟路司机。</p>
+      </div>
+
+      <section class="transport-options" aria-labelledby="transport-options-title">
+        <div class="section-heading">
+          <div>
+            <p class="catalog-kicker">你们拿到的报价</p>
+            <h3 id="transport-options-title">三种方案对比</h3>
+          </div>
+          <p>暂按整车 / 团队总价理解，不含项必须写入合同。</p>
+        </div>
+
+        <article class="transport-option is-leading">
+          <div class="transport-option-title">
+            <span class="option-index">01</span>
+            <div>
+              <p class="option-kind">灵活度最高</p>
+              <h4>成都租车自驾 · 拉萨异地还车</h4>
+            </div>
+          </div>
+          <div class="option-price">
+            <span>当前报价</span>
+            <strong>¥10,000–12,000</strong>
+            <small>4 人均摊约 ¥2,500–3,000</small>
+          </div>
+          <div class="option-balance option-benefit">
+            <strong>得到什么</strong>
+            <p>路线和停留点最自由；两名司机可轮换；坦克 300 到理想 L6 均有选择；无需承担司机的食宿与返空安排。</p>
+          </div>
+          <div class="option-balance option-risk">
+            <strong>承担什么</strong>
+            <p>高原驾驶、临时改线、事故处理和车辆检查都由团队负责；若报价只是裸租，油费、保险、异地还车和超里程会把差价迅速吃掉。</p>
+          </div>
+          <p class="option-gate"><strong>选择门槛：</strong>两人都在承保驾驶员名单内；主线每日驾驶控制在 5–7 小时；不拿城市 SUV 硬走格聂非铺装段。</p>
+        </article>
+
+        <article class="transport-option">
+          <div class="transport-option-title">
+            <span class="option-index">02</span>
+            <div>
+              <p class="option-kind">风险转移更完整</p>
+              <h4>旅行社独立小团 · 路线可继续商定</h4>
+            </div>
+          </div>
+          <div class="option-price">
+            <span>当前报价</span>
+            <strong>¥13,500</strong>
+            <small>4 人均摊约 ¥3,375</small>
+          </div>
+          <div class="option-balance option-benefit">
+            <strong>得到什么</strong>
+            <p>团队不用持续盯路，司机熟悉限速、补给与临时管制；合同、发票和客服体系通常更清楚，路线仍有谈判空间。</p>
+          </div>
+          <div class="option-balance option-risk">
+            <strong>承担什么</strong>
+            <p>车型、司机和实际执行质量可能存在落差；低价若靠固定购物、压缩住宿或另收返空费实现，最终体验未必便宜。</p>
+          </div>
+          <p class="option-gate"><strong>选择门槛：</strong>确认承运资质、实际车型、司机简历、保险、司机食宿、油路停、返空费以及改线退差价规则。</p>
+        </article>
+
+        <article class="transport-option">
+          <div class="transport-option-title">
+            <span class="option-index">03</span>
+            <div>
+              <p class="option-kind">信任背书最强</p>
+              <h4>朋友推荐的司机 / 服务方</h4>
+            </div>
+          </div>
+          <div class="option-price">
+            <span>当前报价</span>
+            <strong>约 ¥15,000</strong>
+            <small>4 人均摊约 ¥3,750</small>
+          </div>
+          <div class="option-balance option-benefit">
+            <strong>得到什么</strong>
+            <p>有真实熟人体验可追溯，沟通和司机稳定性可能优于随机派单；若报价全包，预算也更容易锁定。</p>
+          </div>
+          <div class="option-balance option-risk">
+            <strong>承担什么</strong>
+            <p>价格最高，熟人推荐不等同于资质与保险完备；没有正式合同、营运许可或应急替补时，风险可能仍由乘客承担。</p>
+          </div>
+          <p class="option-gate"><strong>选择门槛：</strong>要求与旅行社同级别的书面合同和保险证明，再核对这 1,500 元溢价具体换来了什么。</p>
+        </article>
+
+        <div class="quote-checklist">
+          <strong>先统一报价口径</strong>
+          <p>租金 · 基础险与补充险 · 异地还车费 · 超里程 · 油 / 电费 · 过路停车 · 司机食宿 · 返空费 · 车辆救援 · 事故停运损失 · 格聂 / 南极洛接驳</p>
+        </div>
+      </section>
+
+      <section class="road-difficulty" aria-labelledby="road-difficulty-title">
+        <div class="section-heading">
+          <div>
+            <p class="catalog-kicker">铺装不等于轻松</p>
+            <h3 id="road-difficulty-title">各路段驾驶难度</h3>
+          </div>
+          <div class="difficulty-key" aria-label="难度图例">
+            <span class="difficulty-pill is-easy">较低</span>
+            <span class="difficulty-pill is-medium">中等</span>
+            <span class="difficulty-pill is-hard">较高</span>
+            <span class="difficulty-pill is-extreme">谨慎</span>
+          </div>
+        </div>
+
+        <div class="road-table-wrap">
+          <table class="road-table">
+            <thead>
+              <tr>
+                <th scope="col">路线 / 路段</th>
+                <th scope="col">路面判断</th>
+                <th scope="col">难度</th>
+                <th scope="col">真正的难点</th>
+                <th scope="col">自驾建议</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">成都 → 康定</th>
+                <td>高速及优质铺装路</td>
+                <td><span class="difficulty-pill is-easy">较低</span></td>
+                <td>旺季车流、隧道群、初次爬升</td>
+                <td>适合作为团队适应日，不要因路好而赶夜路。</td>
+              </tr>
+              <tr>
+                <th scope="row">康定 → 新都桥 → 雅江</th>
+                <td>G318 铺装路</td>
+                <td><span class="difficulty-pill is-medium">中等</span></td>
+                <td>折多山、高海拔弯道、雾雪与大车</td>
+                <td>天气差时让更有山路经验的人驾驶，垭口不久留。</td>
+              </tr>
+              <tr>
+                <th scope="row">雅江 → 理塘 → 巴塘</th>
+                <td>G318 铺装路</td>
+                <td><span class="difficulty-pill is-medium">中等</span></td>
+                <td>连续高海拔、长距离巡航、疲劳和横风</td>
+                <td>两人轮换价值最大；理塘有不适就下撤，不硬住。</td>
+              </tr>
+              <tr>
+                <th scope="row">巴塘 → 芒康 → 左贡</th>
+                <td>以柏油路为主</td>
+                <td><span class="difficulty-pill is-hard">较高</span></td>
+                <td>峡谷窄路、觉巴 / 东达山、落石与长下坡</td>
+                <td>白天通过，提前加满油；驾驶员出现高反立即换人。</td>
+              </tr>
+              <tr>
+                <th scope="row">左贡 → 八宿 → 然乌</th>
+                <td>G318 铺装路</td>
+                <td><span class="difficulty-pill is-hard">较高</span></td>
+                <td>业拉山、怒江 72 拐、长下坡与暗冰</td>
+                <td>低挡控速，禁止空挡滑行；不把导航时长当承诺。</td>
+              </tr>
+              <tr>
+                <th scope="row">然乌 → 波密 → 鲁朗 → 林芝</th>
+                <td>沥青路为主，波密至鲁朗已贯通</td>
+                <td><span class="difficulty-pill is-medium">中等</span></td>
+                <td>临江临崖、降雨落石、施工单边放行</td>
+                <td>雨后先查管制；留出堵车余量，不夜穿峡谷。</td>
+              </tr>
+              <tr>
+                <th scope="row">林芝 → 拉萨</th>
+                <td>双向四车道高等级公路</td>
+                <td><span class="difficulty-pill is-easy">较低</span></td>
+                <td>区间测速、长距离单调驾驶、天气突变</td>
+                <td>路况最好的一段，仍按标志限速并安排休息。</td>
+              </tr>
+              <tr>
+                <th scope="row">G317 成都 → 德格</th>
+                <td>国省干线铺装路为主</td>
+                <td><span class="difficulty-pill is-hard">较高</span></td>
+                <td>路线更长、垭口密、补给间隔大</td>
+                <td>比 G318 更考验连续多日驾驶，不建议压缩赶路。</td>
+              </tr>
+              <tr>
+                <th scope="row">G317 德格 → 昌都 → 那曲 → 拉萨</th>
+                <td>铺装路为主，局部施工随时变化</td>
+                <td><span class="difficulty-pill is-extreme">谨慎</span></td>
+                <td>长期处于高海拔、城镇稀疏、日车程偏长</td>
+                <td>两名司机也不能抵消缺氧疲劳；本次 12 天不优先。</td>
+              </tr>
+              <tr>
+                <th scope="row">理塘 → 稻城亚丁 → 香格里拉</th>
+                <td>G227 等干线铺装路为主</td>
+                <td><span class="difficulty-pill is-medium">中等</span></td>
+                <td>距离长、盘山路多、景区旺季拥堵</td>
+                <td>城市 SUV 可走；亚丁徒步体力负担另算。</td>
+              </tr>
+              <tr>
+                <th scope="row">格聂南线</th>
+                <td>铺装 + 炮弹坑 / 碎石非铺装段</td>
+                <td><span class="difficulty-pill is-extreme">谨慎</span></td>
+                <td>近 5,000 米垭口、烂路、落石、信号和救援弱</td>
+                <td>只选高底盘、有备胎的车辆与熟路司机；理想 L6 不建议穿越。</td>
+              </tr>
+              <tr>
+                <th scope="row">香格里拉 → 德钦 → 盐井 → 芒康</th>
+                <td>G214 二级铺装路为主</td>
+                <td><span class="difficulty-pill is-hard">较高</span></td>
+                <td>峡谷、临崖弯道、雨季塌方与落石</td>
+                <td>可自驾但不要夜行；前一日核对香德段和盐井段通阻。</td>
+              </tr>
+              <tr>
+                <th scope="row">南极洛</th>
+                <td>县乡道 + 当地接驳，核心不靠自驾完成</td>
+                <td><span class="difficulty-pill is-extreme">谨慎</span></td>
+                <td>核心海拔 3,800 米以上，接驳与长距离徒步</td>
+                <td>自驾只解决抵达问题；另订当地车辆 / 向导并预留至少两天。</td>
+              </tr>
+              <tr>
+                <th scope="row">拉萨 → 纳木错</th>
+                <td>铺装景区公路</td>
+                <td><span class="difficulty-pill is-hard">较高</span></td>
+                <td>那根拉高海拔、风雪结冰、往返较长</td>
+                <td>放在拉萨适应后；天气不稳优先删，不与返程航班相连。</td>
+              </tr>
+              <tr>
+                <th scope="row">拉萨 → 羊卓雍措</th>
+                <td>铺装公路</td>
+                <td><span class="difficulty-pill is-medium">中等</span></td>
+                <td>岗巴拉盘山弯道、观景点车流</td>
+                <td>步行少、最容易插入行程；仍避免夜间返拉萨。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="driver-rules" aria-labelledby="driver-rules-title">
+        <div class="section-heading">
+          <div>
+            <p class="catalog-kicker">两名司机怎么发挥价值</p>
+            <h3 id="driver-rules-title">自驾执行底线</h3>
+          </div>
+        </div>
+        <ol>
+          <li><strong>按状态换人，不按性别分工。</strong><span>头痛、反应变慢、困倦、服用影响驾驶的药物，任一出现就停止驾驶。</span></li>
+          <li><strong>2 小时左右主动休息。</strong><span>单人当天不连续承担所有垭口和夜路，团队日驾驶上限按 5–7 小时规划。</span></li>
+          <li><strong>车辆按最难路段选择。</strong><span>只走 G318 主线可优先舒适；走格聂则优先轮胎、离地间隙、备胎和救援能力。</span></li>
+          <li><strong>每天留一个退出选项。</strong><span>天气、管制或高反出现时，能删支线、换住宿或原路返回，不用赶固定打卡表。</span></li>
+        </ol>
+      </section>
+
+      <footer class="road-sources">
+        <strong>路况依据与边界</strong>
+        <p>G318 主线判断参考西藏公安厅、林芝市委及西藏自治区政府公开信息；G227、G214 与纳木错风险参考交通运输部和属地政府近年通告，格聂非铺装段参考属地介绍与媒体实走资料。<a href="https://gat.xizang.gov.cn/xwzx_3233/jfts_212/202001/t20200106_168847.html" target="_blank" rel="noreferrer">G318 分段路况</a> · <a href="https://lz.xzdw.gov.cn/xwzx_624/gxdt_1143/202301/t20230105_309689.html" target="_blank" rel="noreferrer">波密至鲁朗沥青路</a> · <a href="https://www.xizang.gov.cn/xwzx_406/dsdt/201812/t20181217_23789.html" target="_blank" rel="noreferrer">拉林高等级公路</a> · <a href="https://www.mot.gov.cn/xinwen/jiaotongyaowen/202604/t20260420_4203992.html" target="_blank" rel="noreferrer">G227 理亚路</a> · <a href="https://www.gzlt.gov.cn/ltfg/article/590297" target="_blank" rel="noreferrer">格聂官方介绍</a> · <a href="https://www.bjnews.com.cn/detail/172528316419710.html" target="_blank" rel="noreferrer">格聂实走路况</a> · <a href="https://xianggelila.gov.cn/zwxx/yw/202607/20260708_242619.html" target="_blank" rel="noreferrer">G214 汛期风险</a> · <a href="https://wlt.xizang.gov.cn/xwzx_69/tzgg/202510/t20251029_507157.html" target="_blank" rel="noreferrer">纳木错冰雪管制案例</a></p>
+        <p>表中难度是路线规划判断，不是实时交通通告；9 月下旬至 10 月初仍需防初雪、暗冰、落石和临时施工。请在出发前 48 小时及每天早晨重新核验。</p>
       </footer>
     </section>
   </main>
