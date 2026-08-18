@@ -13,6 +13,8 @@
   --route-yunnan: #ffc857;
   --route-genyen: #d16b9e;
   --route-lake: #f4ed78;
+  --route-yubeng: #5fd0bd;
+  --route-restricted: #ff9a8e;
   --nature: #42c69b;
   --culture: #ff836c;
   --mixed: #b899ff;
@@ -365,6 +367,18 @@ h1 {
   stroke: var(--route-yunnan);
   stroke-dasharray: 18 6;
 }
+.route-group[data-route="yubeng-spur"] .route-line {
+  stroke: var(--route-yubeng);
+  stroke-dasharray: 12 6 3 6;
+}
+.route-group[data-route="abuji-reference"] .route-line,
+.route-group[data-route="ganheba-reference"] .route-line {
+  stroke: var(--route-restricted);
+  stroke-width: 3px;
+  stroke-dasharray: 3 8;
+}
+.route-group[data-route="abuji-reference"] .route-halo,
+.route-group[data-route="ganheba-reference"] .route-halo { opacity: 0.5; }
 .route-group[data-route="namtso-spur"] .route-line,
 .route-group[data-route="yamdrok-spur"] .route-line {
   stroke: var(--route-lake);
@@ -386,6 +400,13 @@ h1 {
 
 .show-route-labels .route-label { opacity: 1; }
 
+.show-route-labels .route-group[data-route="yubeng-spur"]:not(.is-active):not(.is-hovered) .route-label,
+.show-route-labels .route-group[data-route="abuji-reference"]:not(.is-active):not(.is-hovered) .route-label,
+.show-route-labels .route-group[data-route="ganheba-reference"]:not(.is-active):not(.is-hovered) .route-label { opacity: 0; }
+
+.route-group.is-active .route-label,
+.route-group.is-hovered .route-label { opacity: 1; }
+
 .spot-layer.is-hidden { opacity: 0; pointer-events: none; }
 
 .spot-group {
@@ -406,6 +427,7 @@ h1 {
 .spot-group[data-type="自然"] .spot-circle { fill: var(--nature); }
 .spot-group[data-type="人文"] .spot-circle { fill: var(--culture); }
 .spot-group[data-type="综合"] .spot-circle { fill: var(--mixed); }
+.spot-group[data-status="restricted"] .spot-circle { fill: #b64f5a; }
 
 .spot-group:hover .spot-circle,
 .spot-group:focus .spot-circle,
@@ -543,6 +565,9 @@ h1 {
 .selection-mark.mark-genyen-route { background: var(--route-genyen); }
 .selection-mark.mark-shangri-la-spur,
 .selection-mark.mark-nanji-spur { background: #d89b22; }
+.selection-mark.mark-yubeng-spur { background: #328d7e; }
+.selection-mark.mark-abuji-reference,
+.selection-mark.mark-ganheba-reference { background: #b64f5a; }
 .selection-mark.mark-south-spurs { background: #d89b22; }
 .selection-mark.mark-complete-options {
   background: linear-gradient(to bottom, #df6048 0 28%, #d16b9e 30% 50%, #d89b22 52% 76%, #b7ae28 78% 100%);
@@ -608,6 +633,18 @@ h1 {
   padding: 0;
   list-style: none;
   border-top: 1px solid var(--line);
+}
+
+.spot-catalog-footnote {
+  margin: 16px 4px 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.spot-catalog-footnote a {
+  color: #286d64;
+  text-underline-offset: 2px;
 }
 
 .spot-list-row { border-bottom: 1px solid var(--line); }
@@ -752,6 +789,19 @@ h1 {
   border-color: #edb2a8;
   color: #8b493c;
   background: #faece9;
+}
+
+.spot-status {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  padding: 2px 5px;
+  border: 1px solid #e0a1a7;
+  border-radius: 4px;
+  color: #8f3540;
+  background: #f9e8ea;
+  font-size: 10px;
+  white-space: nowrap;
 }
 
 .spot-list-location,
@@ -963,6 +1013,9 @@ h1 {
   background: repeating-linear-gradient(to bottom, var(--route-genyen) 0 11px, transparent 11px 15px);
 }
 .route-plan-row[data-tone="yunnan"] .route-plan-line { background: var(--route-yunnan); }
+.route-plan-row[data-tone="yubeng"] .route-plan-line {
+  background: repeating-linear-gradient(to bottom, var(--route-yubeng) 0 10px, transparent 10px 15px);
+}
 .route-plan-row[data-tone="lake"] .route-plan-line {
   border: 1px solid #c1b927;
   background: var(--route-lake);
@@ -1158,6 +1211,11 @@ h1 {
 .route-flow-stage.is-genyen .route-flow-status { color: #874263; }
 .route-flow-stage.is-demanding { background: rgba(255, 131, 108, 0.06); }
 .route-flow-stage.is-demanding::before { background: #ef8d63; }
+.route-flow-stage.is-yubeng { background: rgba(95, 208, 189, 0.07); }
+.route-flow-stage.is-yubeng::before {
+  background: repeating-linear-gradient(to bottom, var(--route-yubeng) 0 8px, transparent 8px 12px);
+}
+.route-flow-stage.is-yubeng .route-flow-status { color: #287266; }
 .route-flow-stage.is-connector::before { background: repeating-linear-gradient(to bottom, #d89b22 0 8px, transparent 8px 12px); }
 
 .route-flow-index {

@@ -94,6 +94,39 @@ const ROUTES = [
     labelAt: [98.82, 28.86]
   },
   {
+    id: "yubeng-spur",
+    label: "德钦至雨崩支线",
+    shortLabel: "雨崩线",
+    summary: "从 G214 德钦、飞来寺附近转向西当，再通过接驳与徒步进入雨崩村",
+    meta: "德钦 · 飞来寺 · 西当 · 雨崩村",
+    coordinates: [
+      [98.91, 28.49], [98.88, 28.44], [98.82, 28.39], [98.794, 28.392]
+    ],
+    labelAt: [98.82, 28.43]
+  },
+  {
+    id: "abuji-reference",
+    label: "阿布吉措位置参考",
+    shortLabel: "阿布吉措 · 禁入",
+    summary: "位于香格里拉附近，但不在 G214 路边；2026 年官方通告明确禁止进入该未开发区域",
+    meta: "香格里拉 · 小中甸 · 阿布吉措（当前禁入）",
+    coordinates: [
+      [99.70, 27.83], [99.82, 27.75], [99.9084, 27.6694]
+    ],
+    labelAt: [99.84, 27.71]
+  },
+  {
+    id: "ganheba-reference",
+    label: "丽江至干河坝位置参考",
+    shortLabel: "干河坝 · 禁入",
+    summary: "位于丽江玉龙雪山南麓，不属于本次向北进入德钦的 G214 滇藏路线，且当前未开放",
+    meta: "香格里拉 · 丽江方向 · 玉龙雪山干河坝（当前禁入）",
+    coordinates: [
+      [99.70, 27.83], [100.02, 27.50], [100.20, 27.20], [100.22, 27.07]
+    ],
+    labelAt: [100.09, 27.33]
+  },
+  {
     id: "nanji-spur",
     label: "香格里拉至南极洛支线",
     shortLabel: "南极洛线",
@@ -233,6 +266,24 @@ const SPOTS = [
     effort: "轻至中等步行", image: imageFor("shangri-la.jpg"), coordinates: [99.70, 27.83], callout: [-122, -62]
   },
   {
+    name: "雨崩", type: "自然", grade: "A", location: "云南省迪庆州德钦县云岭乡雨崩村", route: "G214 德钦支线 · 徒步目的地",
+    note: "从滇藏线德钦、飞来寺附近转入西当，再通过接驳与徒步进入雨崩；官方规划线路约 45 公里、2–3 天，神瀑和冰湖仍属于高强度高海拔路线。",
+    visitTime: "至少 2–3 天", stay: "雨崩村至少住 2 晚", stayTone: "yes",
+    effort: "高海拔长距离徒步，本团慎选", image: imageFor("yubeng-village.jpg"), coordinates: [98.794, 28.392], callout: [24, -70]
+  },
+  {
+    name: "阿布吉措", type: "自然", grade: "B", status: "当前禁入", location: "云南省迪庆州香格里拉市小中甸镇", route: "香格里拉支线 · 位置参考",
+    note: "地理上接近香格里拉段，但不在 G214 路边。香格里拉市 2026 年通告已将洗脸盆垭口至阿布吉措列为禁止开展旅游、探险的未开发区域，当前不纳入行程。",
+    visitTime: "当前不安排", stay: "不进入，不安排住宿", stayTone: "avoid",
+    effort: "未开放禁入区域", image: imageFor("abuji-lake.jpg"), coordinates: [99.9084, 27.6694], callout: [20, -70]
+  },
+  {
+    name: "干河坝", type: "自然", grade: "B", status: "当前禁入", location: "云南省丽江市玉龙县，玉龙雪山南麓", route: "丽江南向远支线 · 位置参考",
+    note: "它不在本次香格里拉向北的 G214 滇藏线上，而在丽江玉龙雪山南麓；属于自然保护区内的未开放区域，当前严禁擅自徒步进入。",
+    visitTime: "当前不安排", stay: "不进入；游览玉龙雪山住丽江", stayTone: "avoid",
+    effort: "未开放禁入区域", image: imageFor("ganheba.jpg"), coordinates: [100.22, 27.07], callout: [-105, -65]
+  },
+  {
     name: "南极洛", type: "自然", grade: "A", location: "云南省迪庆州维西县巴迪乡", route: "远线扩展 · 云南",
     note: "高山湖群、瀑布与原始森林很强，但不在川藏线，核心景观依赖高海拔长距离徒步。",
     visitTime: "至少 2 天", stay: "巴迪乡 / 南极洛村住 1 晚以上", stayTone: "yes",
@@ -301,6 +352,17 @@ const ROUTE_PLANS = [
   {
     group: "景点支线",
     index: "03",
+    title: "雨崩线",
+    tone: "yubeng",
+    mapMode: "yubeng-spur",
+    duration: "至少 2–3 天",
+    compressed: "不建议再压缩",
+    stops: ["德钦", "飞来寺", "西当", "雨崩村", "神瀑 / 冰湖"],
+    note: "是从 G214 德钦段转入的高海拔徒步支线，不是路边停车景点；可利用接驳降低进村强度，但核心景点仍需长距离步行。"
+  },
+  {
+    group: "景点支线",
+    index: "04",
     title: "纳木错线",
     tone: "lake",
     mapMode: "namtso-spur",
@@ -311,7 +373,7 @@ const ROUTE_PLANS = [
   },
   {
     group: "景点支线",
-    index: "04",
+    index: "05",
     title: "羊卓雍措线",
     tone: "lake",
     mapMode: "yamdrok-spur",
@@ -326,8 +388,8 @@ const MODE_DETAILS = {
   all: {
     kicker: "路线总览",
     title: "G317 看藏地人文，G318 看峡谷、冰川、森林，并在拉萨收尾",
-    meta: "成都 · 拉萨 · 19 个精选景点组（含 3 个远线扩展）",
-    routes: ["g317", "g318", "genyen-route", "west-loop", "shangri-la-spur", "g214-return", "nanji-spur", "namtso-spur", "yamdrok-spur"]
+    meta: "成都 · 拉萨 · 22 个精选景点组（含徒步与禁入参考点）",
+    routes: ["g317", "g318", "genyen-route", "west-loop", "shangri-la-spur", "g214-return", "yubeng-spur", "abuji-reference", "ganheba-reference", "nanji-spur", "namtso-spur", "yamdrok-spur"]
   },
   "grand-loop": {
     kicker: "川藏大环线",
@@ -337,19 +399,19 @@ const MODE_DETAILS = {
   },
   "south-spurs": {
     kicker: "滇西南景点支线",
-    title: "理塘经亚丁抵达香格里拉，继续前往南极洛会显著增加时间与体力负担",
-    meta: "舒适 6–7 天 · 不含南极洛 4–5 天",
-    routes: ["shangri-la-spur", "nanji-spur"]
+    title: "亚丁、香格里拉与 G214 构成可行主线；雨崩需徒步，阿布吉措和干河坝当前禁入",
+    meta: "雨崩至少 2–3 天 · 两处禁入点仅作地理参考",
+    routes: ["shangri-la-spur", "g214-return", "nanji-spur", "yubeng-spur", "abuji-reference", "ganheba-reference"]
   },
   "complete-options": {
     kicker: "完整行车路线",
     title: "G318 为主干，理塘后可选格聂南线，或转入亚丁、香格里拉与南极洛支线",
-    meta: "格聂南线需司机确认路况与车型 · 南极洛完整游览可能至少需要 2 天",
-    routes: ["g318", "genyen-route", "shangri-la-spur", "nanji-spur", "g214-return", "namtso-spur", "yamdrok-spur"]
+    meta: "格聂需确认路况 · 南极洛至少 2 天 · 雨崩至少 2–3 天",
+    routes: ["g318", "genyen-route", "shangri-la-spur", "nanji-spur", "g214-return", "yubeng-spur", "namtso-spur", "yamdrok-spur"]
   }
 };
 
-const WEST_BOUNDS = L.latLngBounds([27.0, 89.4], [33.25, 105.4]);
+const WEST_BOUNDS = L.latLngBounds([26.85, 89.4], [33.25, 105.4]);
 const CHINA_BOUNDS = L.latLngBounds([18.0, 73.0], [54.2, 135.2]);
 const stage = document.querySelector(".map-stage");
 const tooltip = document.querySelector("#map-tooltip");
@@ -485,7 +547,7 @@ function setActiveMode(mode) {
 function showSpotDialog(spot) {
   spotDialogImage.src = spot.image;
   spotDialogImage.alt = `${spot.name}实景照片`;
-  spotDialogKicker.textContent = `${spot.grade} 级 · ${spot.type}`;
+  spotDialogKicker.textContent = `${spot.grade} 级 · ${spot.type}${spot.status ? ` · ${spot.status}` : ""}`;
   spotDialogTitle.textContent = spot.name;
   spotDialogLocation.textContent = spot.location;
   spotDialogNote.textContent = spot.note;
@@ -553,6 +615,7 @@ function renderSpotCatalog() {
           <span class="spot-list-title-line">
             <strong>${spot.name}</strong>
             <span class="spot-type" data-type="${spot.type}">${spot.grade} · ${spot.type}</span>
+            ${spot.status ? `<span class="spot-status">${spot.status}</span>` : ""}
           </span>
           <span class="spot-list-location">${spot.location}</span>
           <span class="spot-list-note">${spot.note}</span>
@@ -586,7 +649,7 @@ function renderRoutePlans() {
   routePlanList.innerHTML = ROUTE_PLANS.map((plan, index) => `
     ${index === 0 || ROUTE_PLANS[index - 1].group !== plan.group ? `
       <div class="route-plan-group-heading">
-        <span>${plan.group === "进藏主线" ? "2 条" : "4 条"}</span>
+        <span>${ROUTE_PLANS.filter((candidate) => candidate.group === plan.group).length} 条</span>
         <strong>${plan.group}</strong>
       </div>
     ` : ""}
@@ -778,6 +841,7 @@ function drawMap(china) {
     .join("g")
     .attr("class", "spot-group leaflet-interactive")
     .attr("data-type", (spot) => spot.type)
+    .attr("data-status", (spot) => spot.status ? "restricted" : null)
     .attr("role", "button")
     .attr("aria-label", (spot) => `${spot.name}，${spot.grade}级${spot.type}景点，${spot.location}，${spot.route}`)
     .attr("tabindex", 0);
