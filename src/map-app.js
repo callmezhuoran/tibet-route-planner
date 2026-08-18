@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import L from "leaflet";
-import { Camera, createIcons, Focus, MapPin, Maximize2, X } from "lucide";
+import { BedDouble, Camera, Clock3, createIcons, Focus, MapPin, Maximize2, X } from "lucide";
 import "leaflet/dist/leaflet.css";
 import "./map.css";
 
@@ -14,7 +14,7 @@ function imageFor(fileName) {
   return ATTRACTION_IMAGES[`../assets/attractions/${fileName}`];
 }
 
-createIcons({ icons: { Camera, Focus, MapPin, Maximize2, X } });
+createIcons({ icons: { BedDouble, Camera, Clock3, Focus, MapPin, Maximize2, X } });
 
 const ROUTES = [
   {
@@ -133,96 +133,115 @@ const SPOTS = [
   {
     name: "拉萨人文组", type: "人文", grade: "A", location: "拉萨市城关区", route: "拉萨收尾",
     note: "布达拉宫外景、大昭寺与八廓街组成最强人文组，机位集中，适合轻量拍照。",
+    visitTime: "1.5–2 天", stay: "建议拉萨住 2 晚", stayTone: "yes",
     effort: "轻量步行", image: imageFor("potala-palace.jpg"), coordinates: [91.13, 29.66], callout: [-116, -22]
   },
   {
     name: "羊卓雍措", type: "自然", grade: "A", location: "山南市浪卡子县", route: "拉萨南侧支线",
     note: "蓝绿色圣湖与曲折湖岸是拉萨周边最稳定的自然大景，观景台即可完成主要拍摄。",
+    visitTime: "5–7 小时", stay: "当天返回拉萨", stayTone: "no",
     effort: "短距离步行", image: imageFor("yamdrok-lake.jpg"), coordinates: [90.64, 28.96], callout: [-106, 38]
   },
   {
     name: "纳木错", type: "自然", grade: "A", location: "拉萨市当雄县方向", route: "拉萨北侧支线",
     note: "高原大湖与念青唐古拉山同框，但海拔、往返车程和天气波动都高于羊卓雍措。",
+    visitTime: "1 天", stay: "优先拉萨往返，不住湖边", stayTone: "no",
     effort: "少走路，但海拔高", image: imageFor("namtso-lake.jpg"), coordinates: [90.57, 30.72], callout: [-104, -72]
   },
   {
     name: "雅鲁藏布大峡谷", type: "自然", grade: "A", location: "林芝市米林市派镇方向", route: "林芝支线",
     note: "峡谷、雅江河谷和南迦巴瓦峰同框，是林芝方向的顶级自然景观组。",
+    visitTime: "0.5–1 天", stay: "拍晨昏建议索松村 1 晚", stayTone: "yes",
     effort: "景区车为主", image: imageFor("yarlung-tsangpo-canyon.jpg"), coordinates: [94.90, 29.56], callout: [-48, 54]
   },
   {
     name: "鲁朗", type: "综合", grade: "A", location: "林芝市巴宜区鲁朗镇", route: "G318 顺路",
     note: "森林、牧场、雪山与藏式木屋兼顾自然和人像，视野柔和，步行要求低。",
+    visitTime: "3–5 小时", stay: "可住鲁朗 1 晚，非必须", stayTone: "optional",
     effort: "轻量步行", image: imageFor("lulang-forest.jpg"), coordinates: [94.74, 29.77], callout: [-116, -52]
   },
   {
     name: "巴松措", type: "自然", grade: "B", location: "林芝市工布江达县", route: "G318 短支线",
     note: "湖泊、森林与湖心岛组合成熟，适合在林芝前往拉萨途中作为省力停靠点。",
+    visitTime: "3–5 小时", stay: "可住结巴村 1 晚，非必须", stayTone: "optional",
     effort: "景区车 + 短步行", image: imageFor("basum-lake.jpg"), coordinates: [93.97, 30.00], callout: [-68, -82]
   },
   {
     name: "然乌湖", type: "自然", grade: "A", location: "昌都市八宿县然乌镇", route: "G318 顺路",
     note: "湖面、雪山、公路和晨昏光影集中，是 318 自然线最值得留出完整时段的节点。",
+    visitTime: "3–5 小时", stay: "建议然乌住 1 晚", stayTone: "yes",
     effort: "路边观景为主", image: imageFor("ranwu-lake.jpg"), coordinates: [96.73, 29.45], callout: [28, 22]
   },
   {
     name: "米堆 / 来古冰川", type: "自然", grade: "A", location: "然乌至波密一带", route: "G318 支线二选一",
     note: "冰川、冰湖、森林和村落高差明显；按天气与路况二选一，不安排同日双刷。",
+    visitTime: "4–6 小时", stay: "住然乌或波密 1 晚", stayTone: "yes",
     effort: "中等步行", image: imageFor("midui-glacier.jpg"), coordinates: [96.38, 29.33], callout: [22, 70]
   },
   {
     name: "波密河谷", type: "自然", grade: "B", location: "林芝市波密县", route: "G318 顺路",
     note: "雪山、河谷、森林与城镇层次完整，适合把连续长途驾驶拆成舒缓的一晚。",
+    visitTime: "2–4 小时", stay: "建议波密住 1 晚", stayTone: "yes",
     effort: "路边观景为主", image: imageFor("bomi-valley.jpg"), coordinates: [95.77, 29.86], callout: [30, -72]
   },
   {
     name: "怒江 72 拐", type: "自然", grade: "C", location: "昌都市八宿县", route: "G318 顺路",
     note: "盘山公路和怒江峡谷的路线感强，适合短暂停车留影，不必额外占用半天。",
+    visitTime: "20–40 分钟", stay: "无需当地过夜，住八宿", stayTone: "no",
     effort: "停车观景", image: imageFor("nujiang-72-turns.jpg"), coordinates: [97.04, 30.05], callout: [84, -22]
   },
   {
     name: "塔公 / 新都桥", type: "综合", grade: "A", location: "甘孜州康定市", route: "川西环线 / G318 前段",
     note: "草原、寺院、雪山和秋季光影兼顾自然与旅拍，是川西段最适合拍人的组合。",
+    visitTime: "0.5–1 天", stay: "建议新都桥住 1 晚", stayTone: "yes",
     effort: "轻量步行", image: imageFor("tagong-xinduqiao.jpg"), coordinates: [101.52, 30.18], callout: [-80, -78]
   },
   {
     name: "稻城亚丁", type: "自然", grade: "A", location: "甘孜州稻城县香格里拉镇", route: "亚丁 · 香格里拉支线",
     note: "三神山、洛绒牛场和高山草甸属于川西南顶级自然景观；牛奶海、五色海长线体力压力大，可只走景区车加短线观景。",
+    visitTime: "短线 1 天", stay: "香格里拉镇至少住 2 晚", stayTone: "yes",
     effort: "短线可控；长线高强度", image: imageFor("daocheng-yading.jpg"), coordinates: [100.32, 28.47], callout: [24, 18]
   },
   {
     name: "格聂 / 格聂之眼", type: "自然", grade: "A", location: "甘孜州理塘县格聂镇，理塘至巴塘之间", route: "格聂南线 · G318 替代段",
     note: "格聂群峰、格聂之眼、草原花海和高原村落构成川西顶级雪山景观；它不属于滇藏线，可从理塘进入并在巴塘接回 G318。",
+    visitTime: "完整穿越 2 天", stay: "沿线至少住 1 晚", stayTone: "yes",
     effort: "观景短步行；全线高海拔越野", image: imageFor("genyen-eye.jpg"), coordinates: [99.7593, 29.7983], callout: [22, -78]
   },
   {
     name: "甘孜 / 德格", type: "人文", grade: "A", location: "甘孜州甘孜县、德格县", route: "G317 北线",
     note: "寺院、白塔、藏式城镇与德格印经院构成 317 的核心价值，人文密度明显高于 318。",
+    visitTime: "2–3 天", stay: "甘孜、德格建议各住 1 晚", stayTone: "yes",
     effort: "轻至中等步行", image: imageFor("derge.jpg"), coordinates: [99.23, 31.70], callout: [24, -58]
   },
   {
     name: "四姑娘山 / 丹巴", type: "综合", grade: "B", location: "阿坝州小金县、甘孜州丹巴县", route: "川西环线",
     note: "极高山群峰与嘉绒藏寨互补；可选观景公路和低强度沟口，不必走长线。",
+    visitTime: "1.5–2 天", stay: "至少安排 1 晚", stayTone: "yes",
     effort: "可压缩为轻量", image: imageFor("siguniang-danba.jpg"), coordinates: [102.60, 31.02], callout: [30, 28]
   },
   {
     name: "理塘", type: "综合", grade: "B", location: "甘孜州理塘县", route: "G318 / 亚丁支线入口",
     note: "毛垭大草原、海子山路景与县城藏地人文兼具，是从 G318 转向稻城前很顺路的观景和休整节点。",
+    visitTime: "2–4 小时", stay: "主线可不住；进格聂前可住", stayTone: "optional",
     effort: "路边观景 + 轻量步行", image: imageFor("litang.jpg"), coordinates: [100.27, 30.00], callout: [-92, 24]
   },
   {
     name: "香格里拉", type: "综合", grade: "B", location: "云南省迪庆州香格里拉市", route: "远线扩展 · 滇西北",
     note: "独克宗古城、松赞林寺与纳帕海兼顾人文和自然；同行有人去过，可压缩成中转加半日拍照。",
+    visitTime: "0.5–1 天", stay: "建议住 1 晚", stayTone: "yes",
     effort: "轻至中等步行", image: imageFor("shangri-la.jpg"), coordinates: [99.70, 27.83], callout: [-122, -62]
   },
   {
     name: "南极洛", type: "自然", grade: "A", location: "云南省迪庆州维西县巴迪乡", route: "远线扩展 · 云南",
     note: "高山湖群、瀑布与原始森林很强，但不在川藏线，核心景观依赖高海拔长距离徒步。",
+    visitTime: "至少 2 天", stay: "巴迪乡 / 南极洛村住 1 晚以上", stayTone: "yes",
     effort: "高强度徒步，本团不建议", image: imageFor("nanji-luo.jpg"), coordinates: [99.05, 27.67], callout: [24, 18]
   },
   {
     name: "冈仁波齐", type: "综合", grade: "A", location: "西藏阿里地区普兰县巴嘎乡", route: "远线扩展 · G219 阿里",
     note: "自然与信仰地位都很高，但从拉萨继续向西约 1300 公里，不属于 317/318 顺路景点。",
+    visitTime: "拉萨往返至少 8 天", stay: "阿里需多晚，本次不安排", stayTone: "avoid",
     effort: "极远、极高海拔，本次不并入", image: imageFor("mount-kailash.jpg"), coordinates: [81.31, 31.07], callout: [24, -58]
   }
 ];
@@ -354,6 +373,8 @@ const spotDialogLocation = document.querySelector("#spot-dialog-location");
 const spotDialogNote = document.querySelector("#spot-dialog-note");
 const spotDialogRoute = document.querySelector("#spot-dialog-route");
 const spotDialogEffort = document.querySelector("#spot-dialog-effort");
+const spotDialogVisitTime = document.querySelector("#spot-dialog-visit-time");
+const spotDialogStay = document.querySelector("#spot-dialog-stay");
 const routePlanList = document.querySelector("#route-plan-list");
 const completeRouteMapButton = document.querySelector("#complete-route-map");
 
@@ -470,6 +491,8 @@ function showSpotDialog(spot) {
   spotDialogNote.textContent = spot.note;
   spotDialogRoute.textContent = spot.route;
   spotDialogEffort.textContent = spot.effort;
+  spotDialogVisitTime.textContent = spot.visitTime;
+  spotDialogStay.textContent = spot.stay;
   if (!spotDialog.open) spotDialog.showModal();
 }
 
@@ -533,6 +556,16 @@ function renderSpotCatalog() {
           </span>
           <span class="spot-list-location">${spot.location}</span>
           <span class="spot-list-note">${spot.note}</span>
+          <span class="spot-plan">
+            <span class="spot-plan-item">
+              <i data-lucide="clock-3" aria-hidden="true"></i>
+              <span><small>建议游玩</small><strong>${spot.visitTime}</strong></span>
+            </span>
+            <span class="spot-plan-item" data-stay="${spot.stayTone}">
+              <i data-lucide="bed-double" aria-hidden="true"></i>
+              <span><small>住宿判断</small><strong>${spot.stay}</strong></span>
+            </span>
+          </span>
         </span>
         <span class="spot-list-side">
           <span class="spot-route">${spot.route}</span>
@@ -546,7 +579,7 @@ function renderSpotCatalog() {
   spotList.querySelectorAll(".spot-list-item").forEach((button, index) => {
     button.addEventListener("click", () => selectSpot(orderedSpots[index], null, { fly: true }));
   });
-  createIcons({ icons: { Camera, Focus, MapPin, Maximize2, X } });
+  createIcons({ icons: { BedDouble, Camera, Clock3, Focus, MapPin, Maximize2, X } });
 }
 
 function renderRoutePlans() {
@@ -592,7 +625,7 @@ function renderRoutePlans() {
       setActiveMode(button.dataset.planMapMode);
     });
   });
-  createIcons({ icons: { Camera, Focus, MapPin, Maximize2, X } });
+  createIcons({ icons: { BedDouble, Camera, Clock3, Focus, MapPin, Maximize2, X } });
 }
 
 function setPageTab(name, { scroll = false } = {}) {
