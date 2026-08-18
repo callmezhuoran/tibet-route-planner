@@ -11,6 +11,7 @@
   --route-317: #55c7ff;
   --route-west: #55d09b;
   --route-yunnan: #ffc857;
+  --route-genyen: #d16b9e;
   --route-lake: #f4ed78;
   --nature: #42c69b;
   --culture: #ff836c;
@@ -346,6 +347,10 @@ h1 {
 .route-group[data-route="g318"] .route-line { stroke: var(--route-318); }
 .route-group[data-route="g317"] .route-line { stroke: var(--route-317); stroke-dasharray: 13 9; }
 .route-group[data-route="west-loop"] .route-line { stroke: var(--route-west); stroke-dasharray: 4 8; }
+.route-group[data-route="genyen-route"] .route-line {
+  stroke: var(--route-genyen);
+  stroke-dasharray: 14 6;
+}
 .route-group[data-route="shangri-la-spur"] .route-line,
 .route-group[data-route="nanji-spur"] .route-line {
   stroke: var(--route-yunnan);
@@ -530,11 +535,12 @@ h1 {
 .selection-mark.mark-g318 { background: #df6048; }
 .selection-mark.mark-g317 { background: #268ab7; }
 .selection-mark.mark-west-loop { background: #388a69; }
+.selection-mark.mark-genyen-route { background: var(--route-genyen); }
 .selection-mark.mark-shangri-la-spur,
 .selection-mark.mark-nanji-spur { background: #d89b22; }
 .selection-mark.mark-south-spurs { background: #d89b22; }
 .selection-mark.mark-complete-options {
-  background: linear-gradient(to bottom, #df6048 0 38%, #d89b22 40% 72%, #b7ae28 74% 100%);
+  background: linear-gradient(to bottom, #df6048 0 28%, #d16b9e 30% 50%, #d89b22 52% 76%, #b7ae28 78% 100%);
 }
 .selection-mark.mark-namtso-spur,
 .selection-mark.mark-yamdrok-spur { background: #b7ae28; }
@@ -888,6 +894,9 @@ h1 {
 .route-plan-row[data-tone="g317"] .route-plan-line {
   background: repeating-linear-gradient(to bottom, #268ab7 0 8px, transparent 8px 12px);
 }
+.route-plan-row[data-tone="genyen"] .route-plan-line {
+  background: repeating-linear-gradient(to bottom, var(--route-genyen) 0 11px, transparent 11px 15px);
+}
 .route-plan-row[data-tone="yunnan"] .route-plan-line { background: var(--route-yunnan); }
 .route-plan-row[data-tone="lake"] .route-plan-line {
   border: 1px solid #c1b927;
@@ -1079,6 +1088,9 @@ h1 {
 
 .route-flow-stage.is-option { background: rgba(255, 200, 87, 0.06); }
 .route-flow-stage.is-option::before { background: var(--route-yunnan); }
+.route-flow-stage.is-genyen { background: rgba(209, 107, 158, 0.06); }
+.route-flow-stage.is-genyen::before { background: var(--route-genyen); }
+.route-flow-stage.is-genyen .route-flow-status { color: #874263; }
 .route-flow-stage.is-demanding { background: rgba(255, 131, 108, 0.06); }
 .route-flow-stage.is-demanding::before { background: #ef8d63; }
 .route-flow-stage.is-connector::before { background: repeating-linear-gradient(to bottom, #d89b22 0 8px, transparent 8px 12px); }

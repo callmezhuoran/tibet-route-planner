@@ -32,6 +32,19 @@ const ROUTES = [
     labelAt: [98.25, 29.05]
   },
   {
+    id: "genyen-route",
+    label: "格聂南线",
+    shortLabel: "格聂南线",
+    summary: "从理塘离开 G318，经格聂镇、格聂之眼与格聂南坡，在巴塘附近接回 G318",
+    meta: "理塘 · 铁匠山 · 格聂镇 · 格聂之眼 · 格木 · 巴塘",
+    coordinates: [
+      [100.27, 30.00], [100.12, 29.88], [99.96, 29.75], [99.82, 29.70],
+      [99.76, 29.80], [99.60, 29.70], [99.43, 29.54], [99.24, 29.56],
+      [99.11, 30.00]
+    ],
+    labelAt: [99.58, 29.52]
+  },
+  {
     id: "g317",
     label: "G317 川藏北线",
     summary: "藏地人文主线：羌寨、寺院、白塔与高原城镇密度更高",
@@ -178,6 +191,11 @@ const SPOTS = [
     effort: "短线可控；长线高强度", image: imageFor("daocheng-yading.jpg"), coordinates: [100.32, 28.47], callout: [24, 18]
   },
   {
+    name: "格聂 / 格聂之眼", type: "自然", grade: "A", location: "甘孜州理塘县格聂镇，理塘至巴塘之间", route: "格聂南线 · G318 替代段",
+    note: "格聂群峰、格聂之眼、草原花海和高原村落构成川西顶级雪山景观；它不属于滇藏线，可从理塘进入并在巴塘接回 G318。",
+    effort: "观景短步行；全线高海拔越野", image: imageFor("genyen-eye.jpg"), coordinates: [99.7593, 29.7983], callout: [22, -78]
+  },
+  {
     name: "甘孜 / 德格", type: "人文", grade: "A", location: "甘孜州甘孜县、德格县", route: "G317 北线",
     note: "寺院、白塔、藏式城镇与德格印经院构成 317 的核心价值，人文密度明显高于 318。",
     effort: "轻至中等步行", image: imageFor("derge.jpg"), coordinates: [99.23, 31.70], callout: [24, -58]
@@ -242,6 +260,17 @@ const ROUTE_PLANS = [
   {
     group: "景点支线",
     index: "01",
+    title: "格聂南线",
+    tone: "genyen",
+    mapMode: "genyen-route",
+    duration: "2 天",
+    compressed: "仅车览 1 天",
+    stops: ["理塘", "铁匠山", "格聂镇", "格聂之眼", "格木", "巴塘"],
+    note: "不是滇藏线，而是理塘至巴塘间替代普通 G318 的高海拔景观线；只建议交给熟悉线路、车型和当期路况的包车司机执行。"
+  },
+  {
+    group: "景点支线",
+    index: "02",
     title: "亚丁 · 香格里拉 · 南极洛线",
     tone: "yunnan",
     mapMode: "south-spurs",
@@ -252,7 +281,7 @@ const ROUTE_PLANS = [
   },
   {
     group: "景点支线",
-    index: "02",
+    index: "03",
     title: "纳木错线",
     tone: "lake",
     mapMode: "namtso-spur",
@@ -263,14 +292,14 @@ const ROUTE_PLANS = [
   },
   {
     group: "景点支线",
-    index: "03",
+    index: "04",
     title: "羊卓雍措线",
     tone: "lake",
     mapMode: "yamdrok-spur",
     duration: "1 天",
     compressed: "半日可压缩",
     stops: ["拉萨", "曲水", "岗巴拉", "羊卓雍措", "拉萨"],
-    note: "观景点集中、步行要求低，是五条线路中最容易插入拉萨停留日的一条。"
+    note: "观景点集中、步行要求低，是六条线路中最容易插入拉萨停留日的一条。"
   }
 ];
 
@@ -278,8 +307,8 @@ const MODE_DETAILS = {
   all: {
     kicker: "路线总览",
     title: "G317 看藏地人文，G318 看峡谷、冰川、森林，并在拉萨收尾",
-    meta: "成都 · 拉萨 · 18 个精选景点组（含 3 个远线扩展）",
-    routes: ["g317", "g318", "west-loop", "shangri-la-spur", "g214-return", "nanji-spur", "namtso-spur", "yamdrok-spur"]
+    meta: "成都 · 拉萨 · 19 个精选景点组（含 3 个远线扩展）",
+    routes: ["g317", "g318", "genyen-route", "west-loop", "shangri-la-spur", "g214-return", "nanji-spur", "namtso-spur", "yamdrok-spur"]
   },
   "grand-loop": {
     kicker: "川藏大环线",
@@ -295,9 +324,9 @@ const MODE_DETAILS = {
   },
   "complete-options": {
     kicker: "完整行车路线",
-    title: "G318 为主干，香格里拉线与南极洛线为中途可选，再经德钦、盐井到芒康回接",
-    meta: "南极洛完整游览可能至少需要 2 天 · 当前暂不拆分日期",
-    routes: ["g318", "shangri-la-spur", "nanji-spur", "g214-return", "namtso-spur", "yamdrok-spur"]
+    title: "G318 为主干，理塘后可选格聂南线，或转入亚丁、香格里拉与南极洛支线",
+    meta: "格聂南线需司机确认路况与车型 · 南极洛完整游览可能至少需要 2 天",
+    routes: ["g318", "genyen-route", "shangri-la-spur", "nanji-spur", "g214-return", "namtso-spur", "yamdrok-spur"]
   }
 };
 
@@ -524,7 +553,7 @@ function renderRoutePlans() {
   routePlanList.innerHTML = ROUTE_PLANS.map((plan, index) => `
     ${index === 0 || ROUTE_PLANS[index - 1].group !== plan.group ? `
       <div class="route-plan-group-heading">
-        <span>${plan.group === "进藏主线" ? "2 条" : "3 条"}</span>
+        <span>${plan.group === "进藏主线" ? "2 条" : "4 条"}</span>
         <strong>${plan.group}</strong>
       </div>
     ` : ""}
