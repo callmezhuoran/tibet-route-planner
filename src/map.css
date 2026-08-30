@@ -406,6 +406,19 @@ h1 {
 .route-group[data-route="final-route"].is-hovered .route-halo { stroke-width: 18px; }
 .route-group[data-route="final-route"].is-active .route-line,
 .route-group[data-route="final-route"].is-hovered .route-line { stroke-width: 11px; }
+.route-group[data-route="final-genyen-daytrip"] .route-halo {
+  stroke: rgba(7, 30, 29, 0.94);
+  stroke-width: 12px;
+}
+.route-group[data-route="final-genyen-daytrip"] .route-line {
+  stroke: #74e0c2;
+  stroke-width: 7px;
+  stroke-dasharray: 10 7;
+}
+.route-group[data-route="final-genyen-daytrip"].is-active .route-halo,
+.route-group[data-route="final-genyen-daytrip"].is-hovered .route-halo { stroke-width: 16px; }
+.route-group[data-route="final-genyen-daytrip"].is-active .route-line,
+.route-group[data-route="final-genyen-daytrip"].is-hovered .route-line { stroke-width: 9px; }
 
 .route-label {
   fill: #fff;
@@ -950,6 +963,12 @@ h1 {
 .final-roadbook-header p,
 .roadbook-lock p,
 .roadbook-alert p,
+.genyen-group-plan h3,
+.genyen-group-plan p,
+.genyen-group-facts,
+.genyen-group-facts dt,
+.genyen-group-facts dd,
+.genyen-booking-check ol,
 .roadbook-stats,
 .roadbook-stats dt,
 .roadbook-stats dd,
@@ -1078,6 +1097,93 @@ h1 {
   line-height: 1.7;
 }
 
+.genyen-group-plan {
+  margin-top: 24px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: rgba(225, 239, 235, 0.32);
+}
+
+.genyen-group-plan > header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 4px 14px;
+}
+
+.genyen-group-plan h3 {
+  margin-top: 3px;
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.genyen-group-plan > header a {
+  color: #236a61;
+  font-size: 11px;
+  text-underline-offset: 3px;
+}
+
+.genyen-group-facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid #d5e1dd;
+  border-bottom: 1px solid #d5e1dd;
+}
+
+.genyen-group-facts div {
+  min-width: 0;
+  padding: 15px 16px;
+  border-right: 1px solid #d5e1dd;
+}
+
+.genyen-group-facts div:last-child { border-right: 0; }
+
+.genyen-group-facts dt {
+  color: #397168;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.genyen-group-facts dd {
+  margin-top: 6px;
+  color: #4e625e;
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.genyen-booking-check {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 18px;
+  padding: 16px 4px;
+}
+
+.genyen-booking-check > strong {
+  color: #2b5c55;
+  font-size: 12px;
+}
+
+.genyen-booking-check ol {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px 20px;
+  padding: 0;
+  list-style-position: inside;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.genyen-group-note {
+  padding: 12px 4px 14px;
+  border-top: 1px solid #d5e1dd;
+  color: #6a7774;
+  font-size: 10px;
+  line-height: 1.65;
+}
+
 .final-roadbook-list {
   display: grid;
   gap: 14px;
@@ -1093,6 +1199,7 @@ h1 {
 
 .roadbook-day[data-tone="hard"] { border-left: 4px solid #d89b58; }
 .roadbook-day[data-tone="extreme"] { border-left: 4px solid #b9545e; }
+.roadbook-day[data-tone="group"] { border-left: 4px solid #2e8d81; }
 .roadbook-day[data-tone="city"] { border-left: 4px solid #8d73ad; }
 .roadbook-day[data-tone="easy"] { border-left: 4px solid #55aa88; }
 
@@ -2186,6 +2293,10 @@ h1 {
     border-right: 0;
     border-bottom: 1px solid var(--line);
   }
+  .genyen-group-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .genyen-group-facts div:nth-child(2) { border-right: 0; }
+  .genyen-group-facts div:nth-child(-n + 2) { border-bottom: 1px solid #d5e1dd; }
+  .genyen-booking-check ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .roadbook-day-body { grid-template-columns: 1fr; }
   .roadbook-stops { border-right: 0; border-bottom: 1px solid #dde5e2; }
   .roadbook-rules ol { grid-template-columns: 1fr; }
@@ -2286,6 +2397,18 @@ h1 {
   .roadbook-stats div { padding-inline: 10px; }
   .roadbook-stats dd { font-size: 12px; }
   .roadbook-alert { grid-template-columns: 1fr; gap: 5px; margin-inline: 0; }
+  .genyen-group-plan > header { align-items: flex-start; flex-direction: column; gap: 6px; }
+  .genyen-group-facts { grid-template-columns: 1fr; }
+  .genyen-group-facts div,
+  .genyen-group-facts div:nth-child(2),
+  .genyen-group-facts div:nth-child(-n + 2) {
+    padding-inline: 4px;
+    border-right: 0;
+    border-bottom: 1px solid #d5e1dd;
+  }
+  .genyen-group-facts div:last-child { border-bottom: 0; }
+  .genyen-booking-check { grid-template-columns: 1fr; gap: 7px; }
+  .genyen-booking-check ol { grid-template-columns: 1fr; }
   .roadbook-day-header {
     grid-template-columns: 58px minmax(0, 1fr);
     gap: 12px;
