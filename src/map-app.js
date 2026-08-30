@@ -1,6 +1,9 @@
 import * as d3 from "d3";
 import L from "leaflet";
-import { BedDouble, Camera, Clock3, createIcons, Focus, MapPin, Maximize2, X } from "lucide";
+import {
+  BedDouble, CalendarDays, Camera, Car, Clock3, createIcons, Focus,
+  Hotel, MapPin, Maximize2, ShieldAlert, Utensils, X
+} from "lucide";
 import "leaflet/dist/leaflet.css";
 import "./map.css";
 
@@ -14,7 +17,12 @@ function imageFor(fileName) {
   return ATTRACTION_IMAGES[`../assets/attractions/${fileName}`];
 }
 
-createIcons({ icons: { BedDouble, Camera, Clock3, Focus, MapPin, Maximize2, X } });
+const UI_ICONS = {
+  BedDouble, CalendarDays, Camera, Car, Clock3, Focus, Hotel,
+  MapPin, Maximize2, ShieldAlert, Utensils, X
+};
+
+createIcons({ icons: UI_ICONS });
 
 const ROUTES = [
   {
@@ -159,6 +167,25 @@ const ROUTES = [
       [91.13, 29.66], [90.74, 29.36], [90.65, 29.10], [90.64, 28.96]
     ],
     labelAt: [90.84, 29.24]
+  },
+  {
+    id: "final-route",
+    mode: "final-locked",
+    featuredOnly: true,
+    label: "2026 最终路线",
+    shortLabel: "最终路线",
+    summary: "成都经四姑娘山、丹巴与塔公接入 G318，格聂南线在巴塘回接，最终抵达拉萨",
+    meta: "成都 · 四姑娘山 · 新都桥 · 理塘 · 格聂 · 巴塘 · 然乌 · 波密 · 林芝 · 拉萨",
+    coordinates: [
+      [104.07, 30.67], [103.62, 31.00], [103.12, 30.98], [102.84, 31.10],
+      [101.89, 30.88], [101.51, 30.32], [101.50, 30.04], [101.01, 30.03],
+      [100.27, 30.00], [100.12, 29.88], [99.96, 29.75], [99.82, 29.70],
+      [99.76, 29.80], [99.60, 29.70], [99.43, 29.54], [99.24, 29.56],
+      [99.11, 30.00], [98.60, 29.68], [97.84, 29.67], [96.92, 30.05],
+      [96.73, 29.45], [95.77, 29.86], [94.73, 29.77], [94.36, 29.65],
+      [93.97, 30.00], [91.13, 29.66]
+    ],
+    labelAt: [97.35, 30.36]
   }
 ];
 
@@ -384,6 +411,161 @@ const ROUTE_PLANS = [
   }
 ];
 
+const FINAL_ROADBOOK = [
+  {
+    date: "09.26", weekday: "周六", index: "D1", route: "成都 → 四姑娘山镇",
+    distance: "约 220 km", drive: "5–7 小时", depart: "06:30", difficulty: "S2 · 铺装山路", tone: "moderate",
+    stay: "四姑娘山镇，优先双桥沟口附近 · 约 3200 m",
+    road: "成都至映秀以高速和快速路为主；映秀、卧龙至四姑娘山为 G350 二级双车道，整体铺装，连续弯道较多。",
+    notes: "中秋假期车流是主要变量。巴朗山隧道前后不超车，观景只进正规停车区；首日不追求速度。",
+    food: ["牦牛肉汤锅", "高原土豆", "酥油茶"],
+    stops: [
+      { name: "双桥沟轻量游", time: "3–4 小时", note: "观光车为主，选择 2–3 个站点短步行" },
+      { name: "猫鼻梁观景台", time: "20–30 分钟", note: "天气通透再停，不占用进沟时间" }
+    ],
+    cut: "14:30 后才抵达镇上时，取消双桥沟，改为猫鼻梁和镇区远观；不要把完整进沟挪到次日上午。"
+  },
+  {
+    date: "09.27", weekday: "周日", index: "D2", route: "四姑娘山 → 丹巴 → 塔公 → 新都桥",
+    distance: "约 270 km", drive: "7–8.5 小时", depart: "06:30", difficulty: "S2 · 铺装山路", tone: "moderate",
+    stay: "新都桥镇中心或 G318 沿线 · 约 3400 m",
+    road: "G350、G248 与塔公至新都桥连接线为铺装山路，穿村镇、弯道和牲畜横穿路段较多，节假日停车点容易拥堵。",
+    notes: "当天总时长接近 11 小时。丹巴以后尽量由另一名司机接手；不要在弯道、草原路肩随意停车拍照。",
+    food: ["牦牛肉火锅", "菌菇汤", "青稞饼"],
+    stops: [
+      { name: "甲居藏寨", time: "1–1.5 小时", note: "观景台与寨内轻量拍照，不深走" },
+      { name: "塔公草原 / 塔公寺", time: "1–1.5 小时", note: "草原与寺院二选一重点拍摄" },
+      { name: "新都桥沿线", time: "30–45 分钟", note: "只保留日落前顺路机位" }
+    ],
+    cut: "13:30 后仍未离开丹巴，塔公改为路边远观；17:30 后不再寻找新都桥机位，直接入住。"
+  },
+  {
+    date: "09.28", weekday: "周一", index: "D3", route: "新都桥 → 雅江 → 理塘 → 格聂镇",
+    distance: "约 300 km", drive: "7–8 小时", depart: "07:00", difficulty: "S3 · 高海拔山路", tone: "hard",
+    stay: "格聂镇或则巴村民宿 · 约 3800–4000 m",
+    road: "新都桥至理塘为铺装 G318，需连续翻越高尔寺、剪子弯与卡子拉山一带；理塘转入格聂后，旅游公路与乡道条件开始波动。",
+    notes: "理塘县城海拔约 4014 m，只安排轻量活动。理塘加满燃油、补水并下载离线地图，天黑前进入民宿。",
+    food: ["理塘牦牛肉火锅", "松茸或菌菇菜", "民宿简餐"],
+    stops: [
+      { name: "天路十八弯 / 卡子拉山", time: "合计 30–45 分钟", note: "只在正规观景台停靠" },
+      { name: "勒通古镇", time: "1–1.5 小时", note: "午餐后轻量拍照，不登高" },
+      { name: "铁匠山垭口", time: "20–30 分钟", note: "天气允许时短停，注意风寒" }
+    ],
+    cut: "15:00 仍未从理塘出发，取消格聂穿越：当晚住理塘，次日直接沿 G318 前往巴塘。"
+  },
+  {
+    date: "09.29", weekday: "周二", index: "D4", route: "格聂镇 → 格聂之眼 → 格木 → 巴塘",
+    distance: "约 220 km", drive: "8–10 小时", depart: "06:30", difficulty: "S4 · 越野混合路", tone: "extreme",
+    stay: "巴塘县城中心 · 约 2580 m",
+    road: "全程最难。铺装、破损路、碎石、搓板、泥地和临时涉水可能交替出现，部分区域通信与救援条件弱。",
+    notes: "仅在熟路司机确认当天可穿越时执行；优先坦克 300 等带四驱、AT 胎和可靠备胎的车型。走此线会跳过 G318 海子山、姊妹湖常规段，不建议抵达巴塘后回头补。",
+    food: ["巴塘团结包子", "手工金丝面", "猴子耳朵"],
+    stops: [
+      { name: "格聂之眼", time: "40–50 分钟", note: "停车后短步行，不走草甸深处" },
+      { name: "冷古寺方向观景", time: "45–60 分钟", note: "按司机选择新冷古或远观机位" },
+      { name: "格木草原与沿途机位", time: "累计 1–1.5 小时", note: "分散短停，不单独绕路" }
+    ],
+    cut: "路面出现持续积雪、深泥或司机判断无法在天黑前抵达巴塘时，立即原路退回格聂镇；不为完成穿越冒险。"
+  },
+  {
+    date: "09.30", weekday: "周三", index: "D5", route: "巴塘 → 芒康 → 左贡",
+    distance: "约 260 km", drive: "7–8 小时", depart: "07:00", difficulty: "S3 · G318 山区铺装", tone: "hard",
+    stay: "左贡县城，选供氧、供暖和停车方便的酒店 · 约 3750 m",
+    road: "回到铺装 G318，经金沙江进入西藏，连续翻越拉乌山、觉巴山和东达山一带；弯急坡长，落石与施工等待仍可能发生。",
+    notes: "下坡用发动机制动或稳定的能量回收，避免长时间连续踩刹车；盲弯不借道，遇货车保持安全距离。",
+    food: ["牦牛肉汤锅", "藏面", "甜茶"],
+    stops: [
+      { name: "金沙江川藏界", time: "15–20 分钟", note: "正规停车区短停" },
+      { name: "芒康县城", time: "1 小时", note: "午餐、补给和车辆检查" },
+      { name: "东达山垭口", time: "15–20 分钟", note: "只拍照，不在高海拔久留" }
+    ],
+    cut: "不增加盐井或其他支线；16:00 后仍在芒康附近时，改住如美镇并同步压缩次日景点。"
+  },
+  {
+    date: "10.01", weekday: "周四", index: "D6", route: "左贡 → 邦达 → 怒江 72 拐 → 然乌",
+    distance: "约 290 km", drive: "7–9 小时", depart: "07:00", difficulty: "S3 · 长下坡与连续弯", tone: "hard",
+    stay: "然乌镇，优先湖景方向且有供暖的酒店 · 约 3850 m",
+    road: "G318 以铺装为主，邦达后翻越业拉山并进入怒江 72 拐长下坡；国庆首日车流、慢车和临停车辆会放大风险。",
+    notes: "下坡前检查刹车与胎压，两名司机在邦达轮换；怒江桥及狭窄峡谷不停车，绝不跨实线超车。",
+    food: ["牦牛肉汤锅", "家常川菜", "糌粑或酥油茶"],
+    stops: [
+      { name: "邦达草原", time: "20–30 分钟", note: "作为换司机和短休点" },
+      { name: "怒江 72 拐观景台", time: "25–35 分钟", note: "拍全景后立即下山" },
+      { name: "然乌湖日落", time: "45–60 分钟", note: "抵达早且天气好再安排" }
+    ],
+    cut: "15:30 仍未到八宿，取消然乌湖日落；入住和休息优先，不在湖边等蓝调。"
+  },
+  {
+    date: "10.02", weekday: "周五", index: "D7", route: "然乌 → 米堆冰川轻量版 → 波密",
+    distance: "约 200 km", drive: "4.5–5.5 小时", depart: "08:00", difficulty: "S2 · 铺装主路 + 景区支线", tone: "moderate",
+    stay: "波密县城 · 约 2700 m",
+    road: "G318 主路整体铺装，冰川支线和停车区可能受施工、降雨及景区调度影响；国庆期间重点防排队。",
+    notes: "这是全程恢复日，不追求冰川深处。步行不适者使用景交和下方机位，下午尽早到波密休息。",
+    food: ["石锅鸡", "藏香猪", "菌菇菜"],
+    stops: [
+      { name: "然乌湖晨景", time: "45–60 分钟", note: "湖边短停，不追逐多个机位" },
+      { name: "米堆冰川轻量版", time: "2.5–3 小时", note: "景交加短步行，不走高强度路线" },
+      { name: "波密河谷", time: "30 分钟", note: "入住前顺路拍摄" }
+    ],
+    cut: "冰川支线排队超过 45 分钟或天气封山时直接取消，保留然乌湖和波密河谷。"
+  },
+  {
+    date: "10.03", weekday: "周六", index: "D8", route: "波密 → 通麦 → 鲁朗 → 林芝",
+    distance: "约 230 km", drive: "5–6 小时", depart: "08:00", difficulty: "S2 · G318 铺装", tone: "moderate",
+    stay: "林芝市巴宜区 · 约 3000 m",
+    road: "通麦一带已以隧道桥梁和铺装道路为主，雨雾、湿滑、隧道明暗变化和货车仍是主要驾驶风险。",
+    notes: "进隧道前提前开灯降速，不在隧道口停车；色季拉山风大且可能低温，短停即可。",
+    food: ["鲁朗石锅鸡", "藏香猪", "松茸或时令菌菇"],
+    stops: [
+      { name: "古乡湖 / 波密河谷", time: "30–40 分钟", note: "二选一顺路停靠" },
+      { name: "鲁朗林海与小镇", time: "1.5–2 小时", note: "午餐与牧场拍照合并" },
+      { name: "色季拉山口", time: "20–30 分钟", note: "天气通透再等南迦巴瓦" }
+    ],
+    cut: "鲁朗午餐排队过长就缩短牧场停留；不为等待南迦巴瓦日落而夜间下山。"
+  },
+  {
+    date: "10.04", weekday: "周日", index: "D9", route: "林芝 → 巴松措 → 拉萨",
+    distance: "约 470 km", drive: "6.5–8 小时", depart: "07:00", difficulty: "S1/S2 · 高等级公路 + 景区支线", tone: "easy",
+    stay: "拉萨市城关区，优先北京路或八廓街外围 · 约 3650 m",
+    road: "林拉高等级公路为主，巴松措需转入 S504 等景区连接线；节假日收费站、服务区和景区入口可能排队。",
+    notes: "当天目标是天黑前到拉萨。高速保持车距，任何排队都从巴松措时间里扣，不从拉萨抵达时间里扣。",
+    food: ["林芝早餐", "拉萨牦牛肉火锅", "牦牛酸奶"],
+    stops: [
+      { name: "巴松措", time: "2.5–3 小时", note: "景交与湖心岛轻量游，不深走结巴村" },
+      { name: "尼洋河 / 林拉公路服务区", time: "合计 30 分钟", note: "只用于休息和司机轮换" }
+    ],
+    cut: "10:30 前无法进入巴松措或天气很差时，直接取消景区，沿林拉高等级公路前往拉萨。"
+  },
+  {
+    date: "10.05", weekday: "周一", index: "D10", route: "拉萨人文日",
+    distance: "市内约 20–30 km", drive: "约 1 小时", depart: "按布宫票面时间", difficulty: "城市道路 + 台阶", tone: "city",
+    stay: "拉萨原酒店连住第二晚",
+    road: "市区铺装道路，真正压力来自国庆人流、停车和预约时段；优先步行、网约车或酒店接送，不频繁挪车。",
+    notes: "布达拉宫 2026 旺季需提前 10 天预约，10月5日参观应从 9月25日开始锁票；证件原件随身携带。",
+    food: ["甜茶", "牦牛肉藏面", "五香凉粉", "咖喱土豆"],
+    stops: [
+      { name: "布达拉宫", time: "2.5–3 小时", note: "按预约时段入场，台阶慢走" },
+      { name: "大昭寺", time: "1–1.5 小时", note: "预约和安检时间另留余量" },
+      { name: "八廓街", time: "1.5–2 小时", note: "人文拍照与甜茶休息结合" },
+      { name: "药王山观景台", time: "20–30 分钟", note: "体力允许再加" }
+    ],
+    cut: "未约到布达拉宫票时不购买非官方高价渠道，改为布宫外景、宗角禄康公园和西藏博物馆。"
+  },
+  {
+    date: "10.06", weekday: "周二", index: "D11", route: "拉萨市区 → 拉萨贡嘎机场",
+    distance: "约 65 km", drive: "1–1.5 小时", depart: "航班前 3.5 小时离店", difficulty: "S1 · 城市快速路", tone: "easy",
+    stay: "当日飞成都，成都住宿",
+    road: "机场高速和城市道路为主，国庆返程客流会增加值机、安检和还车时间。",
+    notes: "异地还车至少另留 45–60 分钟；纸质合同、车辆照片、油量和违章查询页面全部留档。",
+    food: ["甜茶", "藏面早餐", "机场简餐"],
+    stops: [
+      { name: "酒店早餐与退房", time: "45–60 分钟", note: "不再安排市内景点" },
+      { name: "异地还车 / 值机", time: "至少 2.5 小时", note: "以租车公司和航司要求为准" }
+    ],
+    cut: "返程日没有可压缩景点；出现交通异常时立即联系租车公司，优先保证航班。"
+  }
+];
+
 const MODE_DETAILS = {
   all: {
     kicker: "路线总览",
@@ -408,6 +590,12 @@ const MODE_DETAILS = {
     title: "G318 为主干，理塘后可选格聂南线，或转入亚丁、香格里拉与南极洛支线",
     meta: "格聂需确认路况 · 南极洛至少 2 天 · 雨崩至少 2–3 天",
     routes: ["g318", "genyen-route", "shangri-la-spur", "nanji-spur", "g214-return", "yubeng-spur", "namtso-spur", "yamdrok-spur"]
+  },
+  "final-locked": {
+    kicker: "2026 最终路线",
+    title: "川西小环线北段接 G318，格聂南线在巴塘回接",
+    meta: "9月26日成都出发 · 10月4日抵达拉萨 · 10月6日离开",
+    routes: ["final-route"]
   }
 };
 
@@ -439,6 +627,8 @@ const spotDialogVisitTime = document.querySelector("#spot-dialog-visit-time");
 const spotDialogStay = document.querySelector("#spot-dialog-stay");
 const routePlanList = document.querySelector("#route-plan-list");
 const completeRouteMapButton = document.querySelector("#complete-route-map");
+const finalRoadbookList = document.querySelector("#final-roadbook-list");
+const finalRouteMapButton = document.querySelector("#final-route-map");
 
 let activeMode = "all";
 let spotsVisible = true;
@@ -513,6 +703,7 @@ function hideTooltip() {
 function detailForMode(mode) {
   if (MODE_DETAILS[mode]) return MODE_DETAILS[mode];
   const route = ROUTES.find((item) => item.id === mode);
+  if (!route) return MODE_DETAILS.all;
   return { kicker: route.label, title: route.summary, meta: route.meta, routes: [route.id] };
 }
 
@@ -534,6 +725,9 @@ function setActiveMode(mode) {
   if (routeLayer) {
     const emphasizedRoutes = mode === "all" ? new Set() : activeRoutes;
     routeLayer.selectAll(".route-group")
+      .classed("is-route-hidden", (route) => route.featuredOnly && !activeRoutes.has(route.id))
+      .attr("aria-hidden", (route) => route.featuredOnly && !activeRoutes.has(route.id) ? "true" : null)
+      .attr("tabindex", (route) => route.featuredOnly && !activeRoutes.has(route.id) ? -1 : 0)
       .classed("is-active", function () { return emphasizedRoutes.has(this.dataset.route); })
       .classed("is-muted", function () { return mode !== "all" && !activeRoutes.has(this.dataset.route); });
   }
@@ -642,7 +836,7 @@ function renderSpotCatalog() {
   spotList.querySelectorAll(".spot-list-item").forEach((button, index) => {
     button.addEventListener("click", () => selectSpot(orderedSpots[index], null, { fly: true }));
   });
-  createIcons({ icons: { BedDouble, Camera, Clock3, Focus, MapPin, Maximize2, X } });
+  createIcons({ icons: UI_ICONS });
 }
 
 function renderRoutePlans() {
@@ -688,7 +882,69 @@ function renderRoutePlans() {
       setActiveMode(button.dataset.planMapMode);
     });
   });
-  createIcons({ icons: { BedDouble, Camera, Clock3, Focus, MapPin, Maximize2, X } });
+  createIcons({ icons: UI_ICONS });
+}
+
+function renderFinalRoadbook() {
+  finalRoadbookList.innerHTML = FINAL_ROADBOOK.map((day) => `
+    <article class="roadbook-day" data-tone="${day.tone}">
+      <header class="roadbook-day-header">
+        <div class="roadbook-date">
+          <span>${day.date}</span>
+          <small>${day.weekday}</small>
+        </div>
+        <div class="roadbook-route">
+          <p>${day.index} · ${day.depart} 出发</p>
+          <h3>${day.route}</h3>
+        </div>
+        <div class="roadbook-metrics">
+          <span><i data-lucide="car" aria-hidden="true"></i>${day.distance}</span>
+          <span><i data-lucide="clock-3" aria-hidden="true"></i>${day.drive}</span>
+          <strong>${day.difficulty}</strong>
+        </div>
+      </header>
+      <div class="roadbook-day-body">
+        <ol class="roadbook-stops" aria-label="${day.date} 景点安排">
+          ${day.stops.map((stop, index) => `
+            <li class="roadbook-stop">
+              <span class="roadbook-stop-index">${String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <div class="roadbook-stop-title">
+                  <strong>${stop.name}</strong>
+                  <span>${stop.time}</span>
+                </div>
+                <p>${stop.note}</p>
+              </div>
+            </li>
+          `).join("")}
+        </ol>
+        <dl class="roadbook-operations">
+          <div>
+            <dt><i data-lucide="hotel" aria-hidden="true"></i>留宿</dt>
+            <dd>${day.stay}</dd>
+          </div>
+          <div>
+            <dt><i data-lucide="shield-alert" aria-hidden="true"></i>道路</dt>
+            <dd>${day.road}</dd>
+          </div>
+          <div>
+            <dt><i data-lucide="car" aria-hidden="true"></i>驾驶</dt>
+            <dd>${day.notes}</dd>
+          </div>
+          <div>
+            <dt><i data-lucide="utensils" aria-hidden="true"></i>吃什么</dt>
+            <dd>${day.food.join(" · ")}</dd>
+          </div>
+        </dl>
+      </div>
+      <footer class="roadbook-cut">
+        <strong>当日删减线</strong>
+        <span>${day.cut}</span>
+      </footer>
+    </article>
+  `).join("");
+
+  createIcons({ icons: UI_ICONS });
 }
 
 function setPageTab(name, { scroll = false } = {}) {
@@ -827,12 +1083,12 @@ function drawMap(china) {
     })
     .on("click", (event, route) => {
       event.stopPropagation();
-      setActiveMode(route.id);
+      setActiveMode(route.mode || route.id);
     })
     .on("keydown", (event, route) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
-        setActiveMode(route.id);
+        setActiveMode(route.mode || route.id);
       }
     });
 
@@ -937,6 +1193,11 @@ completeRouteMapButton.addEventListener("click", () => {
   setActiveMode("complete-options");
 });
 
+finalRouteMapButton.addEventListener("click", () => {
+  setPageTab("map", { scroll: true });
+  setActiveMode("final-locked");
+});
+
 spotsToggle.addEventListener("click", () => {
   setSpotsVisible(!spotsVisible);
 });
@@ -951,6 +1212,7 @@ window.addEventListener("resize", () => map.invalidateSize({ pan: false }));
 
 renderSpotCatalog();
 renderRoutePlans();
+renderFinalRoadbook();
 
 fetch(`${import.meta.env.BASE_URL}map/china-provinces-full.json`)
   .then((response) => {

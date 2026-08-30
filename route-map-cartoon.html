@@ -11,16 +11,17 @@
   <main class="app-shell">
     <header class="app-header">
       <div>
-        <p class="eyebrow">2026 · 四人出行草案</p>
+        <p class="eyebrow">2026 · 四人最终路线</p>
         <h1>川藏路线地图</h1>
       </div>
-      <p class="trip-window">9月25日 成都出发<br>10月6日 拉萨离开</p>
+      <p class="trip-window">9月26日 成都出发<br>10月6日 拉萨离开</p>
     </header>
 
     <nav class="page-tabs" role="tablist" aria-label="攻略视图">
       <button class="page-tab is-active" id="tab-map" type="button" role="tab" aria-selected="true" aria-controls="map-panel" data-page-tab="map">地图总览</button>
+      <button class="page-tab" id="tab-roadbook" type="button" role="tab" aria-selected="false" aria-controls="roadbook-panel" data-page-tab="roadbook">最终路书</button>
       <button class="page-tab" id="tab-routes" type="button" role="tab" aria-selected="false" aria-controls="routes-panel" data-page-tab="routes">路线用时</button>
-      <button class="page-tab" id="tab-itinerary" type="button" role="tab" aria-selected="false" aria-controls="itinerary-panel" data-page-tab="itinerary">完整路线</button>
+      <button class="page-tab" id="tab-itinerary" type="button" role="tab" aria-selected="false" aria-controls="itinerary-panel" data-page-tab="itinerary">路线方案</button>
       <button class="page-tab" id="tab-transport" type="button" role="tab" aria-selected="false" aria-controls="transport-panel" data-page-tab="transport">用车决策</button>
     </nav>
 
@@ -28,6 +29,9 @@
       <nav class="map-toolbar" aria-label="地图控制">
       <div class="route-tabs" role="group" aria-label="路线选择">
         <button class="route-tab is-active" type="button" data-route-mode="all" aria-pressed="true">全部</button>
+        <button class="route-tab route-tab-final" type="button" data-route-mode="final-locked" aria-pressed="false">
+          <span class="route-swatch swatch-final" aria-hidden="true"></span>最终路线
+        </button>
         <button class="route-tab" type="button" data-route-mode="g318" aria-pressed="false">
           <span class="route-swatch swatch-318" aria-hidden="true"></span>G318 南线
         </button>
@@ -82,6 +86,68 @@
           当前只作位置参考，不纳入可执行行程。
         </p>
       </section>
+    </section>
+
+    <section class="page-panel final-roadbook" id="roadbook-panel" role="tabpanel" aria-labelledby="tab-roadbook" data-page-panel="roadbook" hidden>
+      <header class="final-roadbook-header">
+        <div>
+          <p class="catalog-kicker">路线已锁定 · 按 9月26日出发编排</p>
+          <h2>成都 → 四姑娘山 → 格聂南线 → 拉萨</h2>
+        </div>
+        <button class="final-route-map" id="final-route-map" type="button">
+          <i data-lucide="map-pin" aria-hidden="true"></i>
+          <span>地图查看</span>
+        </button>
+      </header>
+
+      <section class="roadbook-summary" aria-label="最终路线摘要">
+        <div class="roadbook-lock">
+          <span>最终路线</span>
+          <strong>川西小环线北段接 G318，格聂替代理塘至巴塘普通路段</strong>
+          <p>成都经汶川、四姑娘山、丹巴、塔公到新都桥；沿 G318 到理塘，穿越格聂南线后在巴塘接回 G318，继续经然乌、波密、林芝抵达拉萨。</p>
+        </div>
+        <dl class="roadbook-stats">
+          <div><dt>行程</dt><dd>11 天 / 10 晚</dd></div>
+          <div><dt>里程</dt><dd>约 2,500–2,700 km</dd></div>
+          <div><dt>驾驶</dt><dd>约 60–68 小时</dd></div>
+          <div><dt>最难路段</dt><dd>格聂镇至巴塘</dd></div>
+        </dl>
+      </section>
+
+      <aside class="roadbook-alert">
+        <strong>可执行，但没有天气缓冲日</strong>
+        <p>9月26日处于中秋假期，10月1日至6日处于国庆假期。住宿、四姑娘山门票和布达拉宫门票都要提前锁定；任何一天晚点，都先删景点，不通过夜间山路追回进度。本版 10月5日保留拉萨人文，不再硬塞纳木错或羊卓雍措；若全员更想看自然，可用羊湖一日替换整天拉萨行程，纳木错则需要额外增加一天。</p>
+      </aside>
+
+      <div class="final-roadbook-list" id="final-roadbook-list"></div>
+
+      <section class="roadbook-rules" aria-labelledby="roadbook-rules-title">
+        <header>
+          <p class="catalog-kicker">司机与全员共同执行</p>
+          <h3 id="roadbook-rules-title">六条硬规则</h3>
+        </header>
+        <ol>
+          <li><strong>不夜驾</strong><span>山区目标 18:30 前入住；晚点只删景点，不压缩休息。</span></li>
+          <li><strong>两小时轮换</strong><span>驾驶员连续驾驶不超过 2 小时，最熟悉非铺装路的人负责格聂。</span></li>
+          <li><strong>格聂设退出方案</strong><span>前一晚确认降雨、积雪和施工；不满足条件就从理塘直走 G318 到巴塘。</span></li>
+          <li><strong>理塘加满</strong><span>进入格聂前补满燃油与饮水，不把村镇充电桩作为计划前提。</span></li>
+          <li><strong>严重不适即下降</strong><span>持续加重的呼吸困难、剧烈头痛或意识异常立即就医，不继续翻垭口。</span></li>
+          <li><strong>每日双核路况</strong><span>前一晚与出发前各核验一次交警、交通厅通告和司机本地信息。</span></li>
+        </ol>
+      </section>
+
+      <footer class="roadbook-sources">
+        <strong>规划依据</strong>
+        <p>
+          <a href="https://www.gov.cn/zhengce/content/202511/content_7047090.htm">2026 年节假日安排</a> ·
+          <a href="https://abazhou.gov.cn/abazhou/c109639/202510/fec568fd9a5449cc908ea2cca0f0c431.shtml">G350 节假日路况</a> ·
+          <a href="https://www.gzlt.gov.cn/ltfg/article/590297">格聂南线官方介绍</a> ·
+          <a href="https://jtt.xizang.gov.cn/bsfw/cxfw/">西藏实时路网</a> ·
+          <a href="https://wlt.xizang.gov.cn/xwzx_69/tzgg/202604/t20260424_536658.html">布达拉宫 2026 预约通告</a> ·
+          <a href="https://wjw.beijing.gov.cn/xwzx_20031/jcdt/202507/t20250724_4157814.html">高原健康提示</a>
+        </p>
+        <small>驾驶时间和里程为路线规划值，不替代出发当天的导航与交通管制信息。</small>
+      </footer>
     </section>
 
     <section class="page-panel route-planner" id="routes-panel" role="tabpanel" aria-labelledby="tab-routes" data-page-panel="routes" hidden>
