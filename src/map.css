@@ -1422,6 +1422,43 @@ h1 {
   line-height: 1.62;
 }
 
+.roadbook-operations > div.roadbook-evening {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  gap: 14px;
+  padding-block: 12px;
+  border-top: 1px solid #e0e7e4;
+  border-right: 0;
+  background: rgba(238, 243, 241, 0.46);
+}
+
+.roadbook-evening dd {
+  display: grid;
+  grid-template-columns: minmax(180px, auto) auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: 6px 14px;
+  margin-top: 0;
+}
+
+.roadbook-evening dd strong {
+  color: #314f49;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.roadbook-evening dd span {
+  color: #2e746a;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.roadbook-evening dd p {
+  color: #687975;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
 .roadbook-navigation {
   padding: 0 18px 14px;
   border-top: 1px solid #dde5e2;
@@ -2608,6 +2645,15 @@ h1 {
     border-bottom: 1px solid #e0e7e4;
   }
   .roadbook-operations > div:last-child { border-bottom: 0; }
+  .roadbook-operations > div.roadbook-evening {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+  .roadbook-evening dd {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+  .roadbook-evening dd span { white-space: normal; }
   .roadbook-navigation { padding-inline: 12px; }
   .roadbook-navigation > header { align-items: flex-start; flex-direction: column; gap: 3px; }
   .roadbook-navigation li { grid-template-columns: 22px minmax(0, 1fr); }
